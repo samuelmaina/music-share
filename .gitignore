@@ -33,6 +33,6 @@ build/
 .vscode/
 
 *.log
-application.property
+application.properties
 *.cmd
 *.jar
