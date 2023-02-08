@@ -29,6 +29,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+
+
 ### VS Code ###
 .vscode/
 
@@ -36,3 +38,4 @@ build/
 application.properties
 *.cmd
 *.jar
+node_modules/
