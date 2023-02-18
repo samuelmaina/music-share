@@ -1,11 +1,12 @@
-export type state = {
+export type AuthState = {
   isLoading: boolean;
   isAuth: boolean;
-  user: any;
+  userInfo: object;
+  userToken: string | null;
   error: string | null;
 };
 
-export type action = {
+export type Action = {
   type: string;
   payload: any;
 };
