@@ -28,8 +28,10 @@ interface FormData {
 }
 
 const SignUpForm: React.FC = () => {
+  const nameInput = React.useRef<TextInput>(null);
   const emailInput = React.useRef<TextInput>(null);
   const passwordInput = React.useRef<TextInput>(null);
+  const confirmPasswordInput = React.useRef<TextInput>(null);
 
   const { loading, userInfo, error, success } = useSelector(
     (state: any) => state.auth
@@ -45,17 +47,20 @@ const SignUpForm: React.FC = () => {
     },
   });
 
-  const onSubmit = handleSubmit((data: FormData) => {
-    console.log(data);
-    // check if passwords match
-    if (data.password !== data.confirmPassword) {
-      alert("Password mismatch");
-    }
-    // transform email string to lowercase to avoid case sensitivity issues in login
-    data.email = data.email.toLowerCase();
-    //@ts-ignore
-    dispatch(registerUser(data));
-  });
+  const onSubmit = handleSubmit(
+    async (data: FormData) => {
+      console.log(data);
+      // check if passwords match
+      if (data.password !== data.confirmPassword) {
+        alert("Password mismatch");
+      }
+      // transform email string to lowercase to avoid case sensitivity issues in login
+      data.email = data.email.toLowerCase();
+      //@ts-ignore
+      dispatch(registerUser(data));
+    },
+    (err) => console.log(err)
+  );
 
   const styles = useStyles();
 
@@ -75,7 +80,7 @@ const SignUpForm: React.FC = () => {
 
             <SizedBox height={32} />
 
-            <Pressable onPress={() => emailInput.current?.focus()}>
+            <Pressable onPress={() => nameInput.current?.focus()}>
               <View style={styles.form}>
                 <Text style={styles.label}>Name</Text>
 
@@ -90,8 +95,8 @@ const SignUpForm: React.FC = () => {
                       keyboardType="ascii-capable"
                       onBlur={onBlur}
                       onChangeText={onChange}
-                      onSubmitEditing={() => passwordInput.current?.focus()}
-                      ref={emailInput}
+                      onSubmitEditing={onSubmit}
+                      ref={nameInput}
                       returnKeyType="next"
                       style={styles.textInput}
                       textContentType="givenName"
@@ -117,7 +122,7 @@ const SignUpForm: React.FC = () => {
                       keyboardType="email-address"
                       onBlur={onBlur}
                       onChangeText={onChange}
-                      onSubmitEditing={() => passwordInput.current?.focus()}
+                      onSubmitEditing={onSubmit}
                       ref={emailInput}
                       returnKeyType="next"
                       style={styles.textInput}
@@ -158,7 +163,7 @@ const SignUpForm: React.FC = () => {
             </Pressable>
             <SizedBox height={16} />
 
-            <Pressable onPress={() => passwordInput.current?.focus()}>
+            <Pressable onPress={() => confirmPasswordInput.current?.focus()}>
               <View style={styles.form}>
                 <Text style={styles.label}>Confirm Password</Text>
                 <Controller
@@ -172,7 +177,7 @@ const SignUpForm: React.FC = () => {
                       onBlur={onBlur}
                       onChangeText={onChange}
                       onSubmitEditing={onSubmit}
-                      ref={passwordInput}
+                      ref={confirmPasswordInput}
                       returnKeyType="done"
                       secureTextEntry
                       style={styles.textInput}
@@ -185,10 +190,6 @@ const SignUpForm: React.FC = () => {
             </Pressable>
 
             <SizedBox height={16} />
-
-            <View style={styles.forgotPasswordContainer}>
-              <Text style={styles.textButton}>Forgot password?</Text>
-            </View>
 
             <SizedBox height={16} />
 

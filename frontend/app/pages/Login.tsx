@@ -23,7 +23,7 @@ interface FormData {
   password: string;
 }
 
-const LoginForm: React.FC = () => {
+const LoginForm = ({ loginHandler }: { loginHandler: Function }) => {
   const emailInput = React.useRef<TextInput>(null);
   const passwordInput = React.useRef<TextInput>(null);
 
@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
   });
 
   const onSubmit = handleSubmit(({ email, password }) => {
-    Alert.alert("Data", `Email: ${email}\nPassword: ${password}`);
+    loginHandler(email, password);
   });
 
   const styles = useStyles();
