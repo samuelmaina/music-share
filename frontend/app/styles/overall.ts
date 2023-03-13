@@ -44,6 +44,7 @@ export default function useStyles() {
       flex: 1,
     },
     safeAreaView: {
+      backgroundColor: "rgb(44, 38, 38)",
       flex: 1,
     },
     subtitle: {
