@@ -1,5 +1,7 @@
 package com.musicShare.musicShare.entities;
 
+import com.musicShare.musicShare.services.entities.Encryption;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,11 +19,16 @@ public class UserDetails {
 
     private String password;
 
+    private String username;
+
     private boolean enabled;
 
-    public UserDetails(String email, String password) {
-        this.email = email;
-        this.password = password;
+    private String telNo;
+
+    public UserDetails(String username, String email, String password) {
+        this.setUsername(username);
+        this.setEmail(email);
+        this.setPassword(password);
         this.enabled = false;
     }
 
@@ -36,6 +43,14 @@ public class UserDetails {
         this.id = id;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -45,11 +60,11 @@ public class UserDetails {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = Encryption.hash(password);
     }
 
     public boolean isEnabled() {
@@ -58,5 +73,17 @@ public class UserDetails {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean confirmPassword(String plain) {
+        return Encryption.verifyHash(plain, this.getPassword());
+    }
+
+    public String getTelNo() {
+        return telNo;
+    }
+
+    public void setTelNo(String telNo) {
+        this.telNo = telNo;
     }
 }
