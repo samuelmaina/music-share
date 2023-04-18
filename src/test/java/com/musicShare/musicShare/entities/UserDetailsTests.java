@@ -14,6 +14,7 @@ public class UserDetailsTests {
         userDetails.setEmail("testuser@example.com");
         userDetails.setPassword("testpassword");
         userDetails.setEnabled(true);
+        userDetails.hashPassword();
         userDetails.setTelNo("1234567890");
 
         assertEquals(1L, userDetails.getId().longValue());
@@ -27,10 +28,9 @@ public class UserDetailsTests {
     @Test
     public void testConstructor() {
         UserDetails userDetails = new UserDetails("testuser", "testuser@example.com", "testpassword");
-
         assertEquals("testuser", userDetails.getUsername());
         assertEquals("testuser@example.com", userDetails.getEmail());
-        assertTrue(userDetails.confirmPassword("testpassword"));
+        assertEquals("testpassword", userDetails.getPassword());
         assertFalse(userDetails.isEnabled());
     }
 
@@ -39,6 +39,7 @@ public class UserDetailsTests {
         String password = "testpassword";
         UserDetails userDetails = new UserDetails();
         userDetails.setPassword(password);
+        userDetails.hashPassword();
         assertNotEquals(password, userDetails.getPassword());
         assertTrue(userDetails.confirmPassword(password));
     }
