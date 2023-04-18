@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.musicShare.musicShare.entities.UserDetails;
 import com.musicShare.musicShare.repositories.UserDetailsRepository;
+import com.musicShare.musicShare.services.JWTAuthenticationFilter;
 
 @RestController
 public class AuthController {
-
     @Autowired
     private UserDetailsRepository userDetailsRepository;
+    @Autowired
+    private JWTAuthenticationFilter jwtAuthenticationFilter;
 
     public String hash(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt(12));
@@ -48,11 +50,14 @@ public class AuthController {
             return new ResponseEntity<>(errorMessage, HttpStatus.UNAUTHORIZED);
         }
 
-        if (!verifyHash(user.getPassword(),
-                foundUser.getPassword())) {
+        if (!verifyHash(user.getPassword(), foundUser.getPassword())) {
             return new ResponseEntity<>(errorMessage, HttpStatus.UNAUTHORIZED);
-        } else {
-            return new ResponseEntity<>(foundUser, HttpStatus.OK);
         }
+
+        // user authenticated successfully, generate JWT token
+        String token = jwtAuthenticationFilter.generateToken(foundUser);
+
+        // return token as response
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 }
