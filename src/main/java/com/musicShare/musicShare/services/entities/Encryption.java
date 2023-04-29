@@ -1,7 +1,9 @@
 package com.musicShare.musicShare.services.entities;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.stereotype.Service;
 
+@Service
 public class Encryption {
     public static String hash(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt(12));
