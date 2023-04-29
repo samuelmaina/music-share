@@ -16,24 +16,24 @@ public class Song {
     private String artist;
     private Long views;
     @Column(unique = true)
-    private String songId;
+    private String songUrl;
 
-    public Song(String name, String artist, String songId) {
+    public Song(String name, String artist, String songUrl) {
         this.setName(name);
         this.setArtist(artist);
-        this.setSongId(songId);
+        this.setSongUrl(songUrl);
         this.setViews(0L);
     }
 
     public Song() {
     }
 
-    public void setSongId(String songId) {
-        this.songId = songId;
+    public void setSongUrl(String songUrl) {
+        this.songUrl = songUrl;
     }
 
-    public String getSongId() {
-        return this.songId;
+    public String getSongUrl() {
+        return this.songUrl;
     }
 
     public String getName() {
@@ -59,5 +59,4 @@ public class Song {
     public void setViews(Long views) {
         this.views = views;
     }
-
 }

@@ -16,7 +16,7 @@ public class SongTest {
         Song song = new Song("Good Song", "Good Artist", "4546454J");
         assertEquals("Good Song", song.getName());
         assertEquals("Good Artist", song.getArtist());
-        assertEquals("4546454J", song.getSongId());
+        assertEquals("4546454J", song.getSongUrl());
     }
 
     @Test
@@ -34,10 +34,10 @@ public class SongTest {
     }
 
     @Test
-    public void testGetSongId() {
+    public void testGetSongUrl() {
         Song song = new Song();
-        song.setSongId("2345JPK");
-        assertEquals("2345JPK", song.getSongId());
+        song.setSongUrl("2345JPK");
+        assertEquals("2345JPK", song.getSongUrl());
     }
 
     @Test
@@ -62,9 +62,9 @@ public class SongTest {
     }
 
     @Test
-    public void testSetSongId() {
+    public void testSetSongUrl() {
         Song song = new Song();
-        song.setSongId("53748834LBJ");
-        assertEquals("53748834LBJ", song.getSongId());
+        song.setSongUrl("53748834LBJ");
+        assertEquals("53748834LBJ", song.getSongUrl());
     }
 }
