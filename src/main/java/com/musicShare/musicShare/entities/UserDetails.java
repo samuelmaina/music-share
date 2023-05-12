@@ -1,14 +1,15 @@
 package com.musicShare.musicShare.entities;
 
+import java.util.List;
+
 import com.musicShare.musicShare.services.entities.Encryption;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.NonNull;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class UserDetails {
@@ -19,15 +20,19 @@ public class UserDetails {
     @Column(unique = true)
     private String email;
 
-    @NonNull
     public String password;
 
-    @NonNull
     private String username;
 
     private boolean enabled;
 
     private String telNo;
+
+    @OneToMany(mappedBy = "user")
+    private List<Review> reviews;
+
+    @OneToMany(mappedBy = "user")
+    private List<PlayList> playlists;
 
     public UserDetails(String username, String email, String password) {
         this.setUsername(username);
@@ -37,6 +42,7 @@ public class UserDetails {
     }
 
     public UserDetails() {
+        super();
     }
 
     public Long getId() {
@@ -87,11 +93,4 @@ public class UserDetails {
         return Encryption.verifyHash(plain, this.getPassword());
     }
 
-    public String getTelNo() {
-        return telNo;
-    }
-
-    public void setTelNo(String telNo) {
-        this.telNo = telNo;
-    }
 }

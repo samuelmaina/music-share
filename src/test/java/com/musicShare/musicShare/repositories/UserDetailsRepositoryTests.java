@@ -18,9 +18,9 @@ public class UserDetailsRepositoryTests {
     @Test
     public void testFindByEmail() {
 
-        UserDetails Account1 = new UserDetails("Account1@test.com", "password1");
-        UserDetails Account2 = new UserDetails("Account2@test.com", "password2");
-        UserDetails Account3 = new UserDetails("Account3@test.com", "password3");
+        UserDetails Account1 = new UserDetails("username1", "Account1@test.com", "password1");
+        UserDetails Account2 = new UserDetails("username2", "Account2@test.com", "password2");
+        UserDetails Account3 = new UserDetails("username3", "Account3@test.com", "password3");
 
         System.out.println(Account1);
         repository.save(Account1);
