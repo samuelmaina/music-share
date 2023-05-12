@@ -80,27 +80,35 @@ public class Review {
         updatedAt = new Date(System.currentTimeMillis());
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserDetails user;
+    // @ManyToOne
+    // @JoinColumn(name = "user_id")
+    // private UserDetails user;
 
-    @ManyToOne
-    @JoinColumn(name = "playlist_id")
-    private PlayList playList;
+    // @ManyToOne
+    // @JoinColumn(name = "playlist_id")
+    // private PlayList playList;
 
-    public void setPlayList(PlayList playList) {
-        this.playList = playList;
-    }
+    // public void setPlayList(PlayList playList) {
+    // this.playList = playList;
+    // }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+    // public Date getCreatedAt() {
+    // return createdAt;
+    // }
 
-    public UserDetails getUser() {
-        return user;
-    }
+    // public UserDetails getUser() {
+    // return user;
+    // }
 
-    public PlayList getPlayList() {
-        return playList;
-    }
+    // public PlayList getPlayList() {
+    // return playList;
+    // }
+
+    // public void setPlayList(Object playList2) {
+    // }
+
+    // public void setUser(UserDetails user) {
+    // this.user = user;
+    // }
+
 }
