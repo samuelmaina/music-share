@@ -6,14 +6,11 @@ import java.sql.Date;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.musicShare.musicShare.repositories.ReviewRepository;
 
-@ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class ReviewTests {
 
@@ -55,9 +52,7 @@ public class ReviewTests {
         Review updatedReview = reviewRepository.findById(review.getId()).orElse(null);
         updatedReview.setComment("This is an updated comment");
         updatedReview.setRating(3.0f);
-        updatedReview.setOriginalPoster(new UserDetails("updated_username", "updated_password", "updated_email"));
-        updatedReview.setCreatedAt(new Date(System.currentTimeMillis() - 100000));
-        updatedReview.setUpdatedAt(new Date(System.currentTimeMillis()));
+
         updatedReview.setUser(userDetails);
         updatedReview.setPlayList(null);
         reviewRepository.save(updatedReview);
