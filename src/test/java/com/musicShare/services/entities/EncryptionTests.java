@@ -1,8 +1,6 @@
-package com.musicShare.musicShare.services.entities;
+package com.musicShare.services.entities;
 
 import org.junit.Test;
-
-import com.musicShare.services.entities.Encryption;
 
 import static org.junit.Assert.*;
 
@@ -36,7 +34,7 @@ public class EncryptionTests {
         Encryption.verifyHash(null, hash);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void testVerifyHashWithNullHash() {
         Encryption.verifyHash("mypassword", null);
     }
